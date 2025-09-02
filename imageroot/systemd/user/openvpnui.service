@@ -10,8 +10,8 @@
 
 [Unit]
 Description=Podman openvpnui.service
-Requires=openvpnui-app.service
-Before=openvpnui-app.service
+Requires=openvpnui-app.service openvpnui-ui.service
+Before=openvpnui-app.service openvpnui-ui.service
 
 [Service]
 Environment=PODMAN_SYSTEMD_UNIT=%n
@@ -22,7 +22,8 @@ ExecStartPre=/bin/rm -f %t/openvpnui.pid %t/openvpnui.pod-id
 ExecStartPre=/usr/bin/podman pod create --infra-conmon-pidfile %t/openvpnui.pid \
     --pod-id-file %t/openvpnui.pod-id \
     --name openvpnui \
-    --publish 127.0.0.1:${TCP_PORT}:80 \
+    --publish 127.0.0.1:${TCP_PORT}:8080 \
+    --publish 1194:1194 \
     --replace
 ExecStart=/usr/bin/podman pod start --pod-id-file %t/openvpnui.pod-id
 ExecStop=/usr/bin/podman pod stop --ignore --pod-id-file %t/openvpnui.pod-id -t 10

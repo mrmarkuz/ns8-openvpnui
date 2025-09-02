@@ -15,16 +15,24 @@ EnvironmentFile=-%S/state/smarthost.env
 WorkingDirectory=%S/state
 Restart=always
 TimeoutStopSec=70
-ExecStartPre=/bin/mkdir -p tmp
+ExecStartPre=/bin/mkdir -p pki clients config staticclients log
 ExecStartPre=/bin/rm -f %t/openvpnui-app.pid %t/openvpnui-app.ctr-id
 ExecStartPre=-runagent discover-smarthost
 ExecStart=/usr/bin/podman run --conmon-pidfile %t/openvpnui-app.pid \
     --cidfile %t/openvpnui-app.ctr-id --cgroups=no-conmon \
     --pod-id-file %t/openvpnui.pod-id --replace -d --name  openvpnui-app \
-    --volume openvpnui-app:/var/www/html/:Z \
-    --volume ./tmp:/tmp:Z \
-    --env ENV_VAR=test \
-    ${NGINX_IMAGE}
+    --cap-add NET_ADMIN \
+    --volume ./pki:/etc/openvpn/pki:z \
+    --volume ./clients:/etc/openvpn/clients:z \
+    --volume ./config:/etc/openvpn/config:z \
+    --volume ./staticclients:/etc/openvpn/staticclients \
+    --volume ./log:/var/log/openvpn:z \
+    --volume ./fw-rules.sh:/opt/app/fw-rules.sh:z \
+    --volume ./server.conf:/etc/openvpn/server.conf:z \
+    --env TRUST_SUB=10.0.70.0/24 \
+    --env GUEST_SUB=10.0.71.0/24 \
+    --env HOME_SUB=192.168.3.0/24 \
+    ${OPENVPN_SERVER_IMAGE}
 ExecStop=/usr/bin/podman stop --ignore --cidfile %t/openvpnui-app.ctr-id -t 10
 ExecReload=/usr/bin/podman kill -s HUP openvpnui-app
 SyslogIdentifier=%u

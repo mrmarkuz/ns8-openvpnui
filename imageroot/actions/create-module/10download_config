@@ -1,0 +1,7 @@
+#!/bin/bash
+
+mkdir -p ./config
+curl --output server.conf "https://raw.githubusercontent.com/d3vilh/openvpn-server/refs/heads/main/server.conf"
+curl --output config/easy-rsa.vars "https://raw.githubusercontent.com/d3vilh/openvpn-server/refs/heads/main/config/easy-rsa.vars"
+curl --output config/client.conf "https://raw.githubusercontent.com/d3vilh/openvpn-server/refs/heads/main/config/client.conf"
+echo "" > ./fw-rules.sh
