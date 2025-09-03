@@ -23,7 +23,7 @@ ExecStartPre=/usr/bin/podman pod create --infra-conmon-pidfile %t/openvpnui.pid 
     --pod-id-file %t/openvpnui.pod-id \
     --name openvpnui \
     --publish 127.0.0.1:${TCP_PORT}:8080 \
-    --publish 1194:1194 \
+    --publish 1194:1194/udp \
     --replace
 ExecStart=/usr/bin/podman pod start --pod-id-file %t/openvpnui.pod-id
 ExecStop=/usr/bin/podman pod stop --ignore --pod-id-file %t/openvpnui.pod-id -t 10

@@ -28,7 +28,6 @@ ExecStart=/usr/bin/podman run --conmon-pidfile %t/openvpnui-ui.pid \
     --volume ./pki:/usr/share/easy-rsa/pki:z \
     --env OPENVPN_ADMIN_USERNAME=admin \
     --env OPENVPN_ADMIN_PASSWORD=Nethesis,1234 \
-#    --privileged \
     ${OPENVPN_UI_IMAGE}
 ExecStop=/usr/bin/podman stop --ignore --cidfile %t/openvpnui-ui.ctr-id -t 10
 ExecReload=/usr/bin/podman kill -s HUP openvpnui-ui
