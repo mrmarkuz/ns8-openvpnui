@@ -5,3 +5,4 @@ curl --output server.conf "https://raw.githubusercontent.com/d3vilh/openvpn-serv
 curl --output config/easy-rsa.vars "https://raw.githubusercontent.com/d3vilh/openvpn-server/refs/heads/main/config/easy-rsa.vars"
 curl --output config/client.conf "https://raw.githubusercontent.com/d3vilh/openvpn-server/refs/heads/main/config/client.conf"
 echo "" > ./fw-rules.sh
+chmod 770 ./fw-rules.sh
