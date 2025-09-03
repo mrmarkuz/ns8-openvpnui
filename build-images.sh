@@ -36,7 +36,7 @@ buildah add "${container}" imageroot /imageroot
 buildah add "${container}" ui/dist /ui
 
 buildah config --entrypoint=/ \
-    --label="org.nethserver.authorizations=traefik@node:routeadm node:fwadm" \
+    --label="org.nethserver.authorizations=traefik@node:routeadm node:fwadm node:tunadm,portsadm" \
     --label="org.nethserver.tcp-ports-demand=1" \
     --label="org.nethserver.rootfull=0" \
     --label="org.nethserver.images=docker.io/d3vilh/openvpn-server:0.5.5 docker.io/d3vilh/openvpn-ui:0.9.5.6" \
