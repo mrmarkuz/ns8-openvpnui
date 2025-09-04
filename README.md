@@ -31,6 +31,15 @@ Click on the certificate name to download the client .ovpn file
 
 Import the file on a client and connect
 
+To block access to the wireguard IP you could add the following to `state/fw-rules.sh`:
+
+```
+iptables -A FORWARD -s 10.0.70.0/24 -d 10.5.4.1 -j DROP
+iptables -A FORWARD -d 10.5.4.1 -s 10.0.70.0/24 -j DROP
+```
+
+Check the [documentation](https://github.com/d3vilh/openvpn-ui?tab=readme-ov-file#firewall-rules) for an example to isolate clients from each other.
+
 ## Uninstall
 
 To uninstall the instance:
