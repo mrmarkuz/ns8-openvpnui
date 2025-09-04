@@ -21,8 +21,6 @@ ExecStartPre=-runagent discover-smarthost
 ExecStart=/usr/bin/podman run --conmon-pidfile %t/openvpnui-ui.pid \
     --cidfile %t/openvpnui-ui.ctr-id --cgroups=no-conmon \
     --pod-id-file %t/openvpnui.pod-id --replace -d --name  openvpnui-ui \
-    --sysctl="net.ipv4.ip_forward=1" \
-    --cap-add=MKNOD,NET_ADMIN,NET_RAW,SYS_MODULE \
     --volume ./:/etc/openvpn:z \
     --volume ./db:/opt/openvpn-ui/db:z \
     --volume ./pki:/usr/share/easy-rsa/pki:z \

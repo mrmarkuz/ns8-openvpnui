@@ -17,6 +17,16 @@ Output example:
 
 Configure the FQDN and browse to it. Login with username admin and password Nethesis,1234
 
+In OpenVPN UI settings, set the Management interface to `10.0.70.1:2080`
+
+In the OpenVPN Server configuration, set DNS servers and subnets
+
+Create a certificate on the certificate page
+
+Click on the certificate name to download the client .ovpn file
+
+Import the file on a client and connect
+
 ## Uninstall
 
 To uninstall the instance:
