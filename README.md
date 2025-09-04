@@ -17,9 +17,13 @@ Output example:
 
 Configure the FQDN and browse to it. Login with username admin and password Nethesis,1234
 
+In the profile configuration of the Administrator on top right, set a mail address and a new password
+
 In OpenVPN UI settings, set the Management interface to `10.0.70.1:2080`
 
-In the OpenVPN Server configuration, set DNS servers and subnets
+In the OpenVPN Server configuration set DNS servers and subnets
+
+In the OpenVPN Client configuration set the connection address to the openvpnui FQDN
 
 Create a certificate on the certificate page
 
